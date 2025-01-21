@@ -1,0 +1,1495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" version="1" targetNamespace="http://mvp.bafin.de/sp/v1/mmdl/auslanz/" xmlns:mvp="http://mvp.bafin.de/sp/v1/mvp/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://mvp.bafin.de/sp/v1/mmdl/auslanz/">
+
+
+	<!-- Import common types -->
+	<xsd:import namespace="http://mvp.bafin.de/sp/v1/mvp/"
+				schemaLocation="mmdl.xsd"/>
+
+<xsd:complexType name="reportAuslagerungsanzeigeType">
+
+<xsd:sequence>
+
+<xsd:element name="allgemeineAngaben" type="allgemeineAngabenType"/>
+
+<xsd:element name="ansprechpartner" type="ansprechpartnerType" minOccurs="0"/>
+
+<xsd:element name="angabenAuslagerung" type="angabenAuslagerungType" minOccurs="0"/>
+
+<xsd:element name="risikobewertungRisikoanalyse" type="risikobewertungRisikoanalyseType" minOccurs="0"/>
+
+<xsd:element name="auslagerungsnehmer" type="auslagerungsnehmerType" minOccurs="0"/>
+
+<xsd:element name="vertragsdaten" type="vertragsdatenType" minOccurs="0"/>
+
+<xsd:element name="cloudAuslagerungen" type="cloudAuslagerungenType" minOccurs="0"/>
+
+<xsd:element name="subunternehmen" type="subunternehmenType" minOccurs="0"/>
+
+<xsd:element name="dateiupload" type="dateiuploadType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="allgemeineAngabenType">
+
+<xsd:sequence>
+
+<xsd:element name="artUnternehmen" type="artUnternehmenType"/>
+
+<xsd:element name="artMeldung" type="artMeldungType"/>
+
+<xsd:element name="referenznummer" type="referenznummerType" minOccurs="0"/>
+<!-- nur bei artMeldung in ("UPDATE", "VOLLZUG"); "UPDATE" (pflicht), "VOLLZUG" (optional) -->
+
+<xsd:element name="grundWesentlicheAenderung" type="grundWesentlicheAenderungType" minOccurs="0"/>
+<!-- nur bei artMeldung = "UPDATE" (pflicht) -->
+
+<xsd:element name="fondsListe" type="fondsListeType" minOccurs="0"/>
+<!-- nur bei artUnternehmen = "KVG" (optional) -->
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="ansprechpartnerType">
+
+<xsd:sequence>
+
+<xsd:element name="name" type="string_100" minOccurs="0"/>
+
+<xsd:element name="telefon" type="string_100" minOccurs="0"/>
+
+<xsd:element name="email" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="angabenAuslagerungType">
+
+<xsd:sequence>
+
+<xsd:element name="referenznummer" type="string_100" minOccurs="0"/>
+
+<xsd:element name="artAuslagerung" type="artAuslagerungType" minOccurs="0"/>
+
+<xsd:element name="umfangAuslagerung" type="string_4000" minOccurs="0"/>
+
+<xsd:element name="grundAuslagerung" type="string_500" minOccurs="0"/>
+
+<xsd:element name="grundGemAIFMVO" type="grundGemAIFMVOType" minOccurs="0"/>
+
+<xsd:element name="wesentlicheAuslagerung" type="wesentlicheAuslagerungType" minOccurs="0"/>
+
+<xsd:element name="massnahmenVermeidungRisiken" type="string_4000" minOccurs="0"/>
+
+<xsd:element name="unterstuetztZeitkritischeGeschaeftsvorgaenge" type="xsd:boolean" minOccurs="0"/>
+
+<xsd:element name="auslagerungGenehmigtVon" type="auslagerungGenehmigtVonType" minOccurs="0"/>
+
+<xsd:element name="kategorieAuslagerung" type="kategorieAuslagerungType" minOccurs="0"/>
+
+<xsd:element name="ausgelagerteFunktionAufgabe" type="ausgelagerteFunktionAufgabeType" minOccurs="0"/>
+
+<xsd:element name="bestehenInteressenkonflikte" type="bestehenInteressenkonflikteType" minOccurs="0"/>
+
+<xsd:element name="ausgelagerteDaten" type="ausgelagerteDatenType" minOccurs="0"/>
+
+<xsd:element name="uebertragungPersonenbezogeneDaten" type="xsd:boolean" minOccurs="0"/>
+
+<xsd:element name="verarbeitungPersonenbezogeneDaten" type="xsd:boolean" minOccurs="0"/>
+
+<xsd:element name="auslagerungsvereinbarungGeltendesRecht" type="string_1000" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="artUnternehmenType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="FDI">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Finanzdienstleistungsinstitut</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="KVG">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Kapitalverwaltungsgesellschaft</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="KI">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Kreditinstitut</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="VU">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Versicherungsunternehmen/EbAV</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="WPI">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Wertpapierinstitut</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="ZEGI">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Zahlungs- und E-Geldinstitute</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="artMeldungType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="ABSICHT">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Absichtsanzeige</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="UPDATE">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Updatemeldung/Mitteilung wesentlicher Umst&#228;nde und &#196;nderungen</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="VOLLZUG">
+<!-- nicht bei artUnternehmen = "KVG" -->
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Vollzugsmeldung</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="artAuslagerungType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="TEIL">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Teilauslagerung</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="VOLL">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Vollauslagerung</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="referenznummerType">
+
+<xsd:restriction base="xsd:token">
+
+<xsd:minLength value="1"/>
+
+<xsd:maxLength value="40"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="grundWesentlicheAenderungType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="grundWesentlicheAenderungEnumListeType"/>
+
+<xsd:element name="sonstige" type="string_4000" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="grundWesentlicheAenderungEnumListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="grundWesentlicheAenderungEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="grundWesentlicheAenderungEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="ABSCHLUSS_ZUSAETZLICHER_VERTRAGSBESTANDTEILE"/>
+
+<xsd:enumeration value="AENDERUNG_NEUE_RISIKOANALYSE"/>
+
+<xsd:enumeration value="AENDERUNG_EINSCHAETZUNG_ERSETZBARKEIT"/>
+
+<xsd:enumeration value="AENDERUNG_EINSTUFUNG_AUSLAGERUNG"/>
+
+<xsd:enumeration value="NACHTRAEGLICHE_ERBRINGUNG"/>
+
+<xsd:enumeration value="NEUE_SUBDELEGATIONEN"/>
+
+<xsd:enumeration value="KUENDIGUNG_AUSLAGERUNG"/>
+
+<xsd:enumeration value="UEBERNAHME_AUSLAGERUNGSUNTERNEHMEN"/>
+
+<xsd:enumeration value="VERTRAGSAENDERUNGEN"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="fondsListeType">
+
+<xsd:sequence>
+
+<xsd:element name="fond" type="fondType" maxOccurs="500"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="fondType">
+
+<xsd:sequence>
+
+<xsd:element name="isin" type="mvp:isinType" minOccurs="0"/>
+
+<xsd:element name="lei" type="mvp:leiType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="grundGemAIFMVOType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="grundGemAIFMVOEnumListeType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="grundGemAIFMVOEnumListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="grundGemAIFMVOEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="grundGemAIFMVOEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="OPTIMIERUNG"/>
+
+<xsd:enumeration value="KOSTENEINSPARUNGEN"/>
+
+<xsd:enumeration value="FACHKENNTNISSE"/>
+
+<xsd:enumeration value="ZUGANG"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="wesentlicheAuslagerungType">
+
+<xsd:choice>
+
+<xsd:sequence>
+
+<xsd:element name="ja" type="mvp:emptyElementType"/>
+
+<xsd:element name="begruendung" type="string_4000" minOccurs="0"/>
+
+<xsd:element name="datumWesentlichkeit" type="mvp:dateType" minOccurs="0"/>
+			</xsd:sequence>
+
+<xsd:element name="nein" type="mvp:emptyElementType"/>
+		</xsd:choice>
+	</xsd:complexType>
+
+
+<xsd:complexType name="auslagerungGenehmigtVonType">
+
+<xsd:choice>
+
+<xsd:element name="gremium" type="genehmigungType"/>
+
+<xsd:element name="personFunktion" type="genehmigungType"/>
+		</xsd:choice>
+	</xsd:complexType>
+
+
+<xsd:complexType name="genehmigungType">
+
+<xsd:sequence>
+
+<xsd:element name="benennung" type="string_100" minOccurs="0"/>
+
+<xsd:element name="datum" type="mvp:dateType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="kategorieAuslagerungType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="kategorieAuslagerungEnumListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="kategorieAuslagerungEnumListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="kategorieAuslagerungEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="kategorieAuslagerungEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="ANLAGEGRENZPRUEFUNGSSYSTEME"/>
+
+<xsd:enumeration value="AUFSICHTLICHES_ANZEIGE_MELDEWESEN"/>
+
+<xsd:enumeration value="BERECHNUNG_TECHNISCHE_RUECKSTELLUNGEN"/>
+<!-- nur bei artUnternehmen = "VU" -->
+
+<xsd:enumeration value="BERECHNUNG_VERSICHERUNGSTECHNISCHE_RUECKSTELLUNGEN"/>
+<!-- nur bei artUnternehmen = "VU" -->
+
+<xsd:enumeration value="BESTANDSVERWALTUNG"/>
+<!-- nur bei artUnternehmen = "VU" -->
+
+<xsd:enumeration value="BUCHHALTUNG_INVESTMENTVERMOEGEN"/>
+
+<xsd:enumeration value="BUCHFUEHRUNG_RECHNUNGSWESEN"/>
+
+<xsd:enumeration value="COLLATERAL_MANAGEMENT"/>
+
+<xsd:enumeration value="CURRENCY_OVERLAY_MANAGEMENT"/>
+
+<xsd:enumeration value="ERBRINGUNG_DIENSTLEISTUNGEN"/>
+
+<xsd:enumeration value="ERBRINGUNG_DIENSTLEISTUNGEN_WPIG"/>
+
+<xsd:enumeration value="INFORMATIONSTECHNOLOGIE"/>
+
+<xsd:enumeration value="KOLLEKTIVE_PORTFOLIOVERWALTUNG"/>
+
+<xsd:enumeration value="KONTROLLFUNKTION"/>
+
+<xsd:enumeration value="LEISTUNGSBEARBEITUNG"/>
+<!-- nur bei artUnternehmen = "VU" -->
+
+<xsd:enumeration value="MELDUNG_TRANSAKTIONSREGISTER"/>
+
+<xsd:enumeration value="ORDERDESK"/>
+
+<xsd:enumeration value="PERSONALWESEN"/>
+
+<xsd:enumeration value="RISIKOMANAGEMENT"/>
+
+<xsd:enumeration value="TRANSAKTIONSMANAGEMENT"/>
+
+<xsd:enumeration value="UNTERSTUETZUNGSFUNKTIONEN_DIENSTLEISTUNGEN"/>
+
+<xsd:enumeration value="VERMOEGENSANLAGE_VERWALTUNG"/>
+<!-- nur bei artUnternehmen = "VU" -->
+
+<xsd:enumeration value="VERTRAGLICH_GEBUNDENE_VERMITTLER"/>
+
+<xsd:enumeration value="VERTRIEB"/>
+<!-- nur bei artUnternehmen = "VU" -->
+
+<xsd:enumeration value="P6_GWG"/>
+
+<xsd:enumeration value="P17_GWG"/>
+
+<xsd:enumeration value="P24C_KWG"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="ausgelagerteFunktionAufgabeType">
+
+<xsd:sequence>
+
+<xsd:element name="aufsichtlichesAnzeigeMeldewesen" type="aufsichtlichesAnzeigeMeldewesenType" minOccurs="0"/>
+
+<xsd:element name="buchfuehrungRechnungswesen" type="buchfuehrungRechnungswesenType" minOccurs="0"/>
+
+<xsd:element name="erbringungDienstleistungen" type="erbringungDienstleistungenType" minOccurs="0"/>
+
+<xsd:element name="erbringungDienstleistungenWpIG" type="erbringungDienstleistungenWpIGType" minOccurs="0"/>
+
+<xsd:element name="informationstechnologie" type="informationstechnologieType" minOccurs="0"/>
+
+<xsd:element name="kontrollfunktion" type="kontrollfunktionType" minOccurs="0"/>
+
+<xsd:element name="unterstuetzungsfunktionenDienstleistungen" type="unterstuetzungsfunktionenDienstleistungenType" minOccurs="0"/>
+
+<xsd:element name="vertraglichGebundeneVermittler" type="vertraglichGebundeneVermittlerType" minOccurs="0"/>
+
+<xsd:element name="p6GwG" type="p6GwGType" minOccurs="0"/>
+
+<xsd:element name="p17GwG" type="p17GwGType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="informationstechnologieType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="informationstechnologieListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="informationstechnologieListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="informationstechnologieEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="informationstechnologieEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="ANWENDUNGSDIENSTE"/>
+
+<xsd:enumeration value="BEREITSTELLUNG_NETZWERKTECHNIK"/>
+
+<xsd:enumeration value="BETRIEB_RECHENZENTRUM"/>
+
+<xsd:enumeration value="CLOUD_SERVICES"/>
+
+<xsd:enumeration value="DATENBEREITSTELLUNGSDIENSTE"/>
+
+<xsd:enumeration value="DATENSPEICHER_ARCHIVIERUNG"/>
+
+<xsd:enumeration value="IDENTIFIKATION_STEUERUNG_CYBERRISIKEN"/>
+
+<xsd:enumeration value="IT_SICHERHEIT"/>
+
+<xsd:enumeration value="KERNBANKENSYSTEM"/>
+
+<xsd:enumeration value="SOFTWARE_ALLGEMEIN"/>
+
+<xsd:enumeration value="SOFTWARE_WPDL"/>
+
+<xsd:enumeration value="TECHNISCHER_BETRIEB_HANDELSSYSTEM"/>
+
+<xsd:enumeration value="WARTUNG_IT"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="kontrollfunktionType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="kontrollfunktionListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="kontrollfunktionListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="kontrollfunktionEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="kontrollfunktionEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="FIRST_LEVEL_KONTROLLE"/>
+
+<xsd:enumeration value="SINGLE_OFFICER"/>
+
+<xsd:enumeration value="COMPLIANCE_KAMARISK"/>
+
+<xsd:enumeration value="COMPLIANCE_MARISK"/>
+
+<xsd:enumeration value="COMPLIANCE_VAG"/>
+
+<xsd:enumeration value="COMPLIANCE_WPHG"/>
+
+<xsd:enumeration value="FINANZ_ERTRAGSCONTROLLING"/>
+
+<xsd:enumeration value="INTERNE_REVISION"/>
+
+<xsd:enumeration value="KONTROLLE_ORDERAUSFUEHRUNG"/>
+
+<xsd:enumeration value="RISIKOCONTROLLING_URCF"/>
+
+<xsd:enumeration value="VERSICHERUNGSMATHEMATISCHE_FUNKTION"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="erbringungDienstleistungenWpIGType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="erbringungDienstleistungenWpIGListeType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="erbringungDienstleistungenWpIGListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="erbringungDienstleistungenWpIGEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="erbringungDienstleistungenWpIGEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="FINANZKOMMISIONSGESCHAEFT"/>
+
+<xsd:enumeration value="EMISSIONSGESCHAEFT"/>
+
+<xsd:enumeration value="ANLAGEVERMITTLUNG"/>
+
+<xsd:enumeration value="ANLAGEBERATUNG"/>
+
+<xsd:enumeration value="ABSCHLUSSVERMITTLUNG"/>
+
+<xsd:enumeration value="BETRIEB_MULTILATERALES_HANDELSSYSTEM"/>
+
+<xsd:enumeration value="BETRIEB_ORGANISIERTES_HANDELSSYSTEM"/>
+
+<xsd:enumeration value="PLATZIERUNGSGESCHAEFT"/>
+
+<xsd:enumeration value="FINANZPORTFOLIOVERWALTUNG"/>
+
+<xsd:enumeration value="MARKET_MAKING"/>
+
+<xsd:enumeration value="SYSTEMATISCHE_INTERNALISIERUNG"/>
+
+<xsd:enumeration value="EIGENHANDEL"/>
+
+<xsd:enumeration value="HOCHFREQUENZHANDEL"/>
+
+<xsd:enumeration value="ZENTRALE_KONTENFUEHRUNG"/>
+
+<xsd:enumeration value="GEWAEHRUNG_KREDITE"/>
+
+<xsd:enumeration value="BERATUNG_UNTERNEHMEN"/>
+
+<xsd:enumeration value="DEVISENGESCHAFTE"/>
+
+<xsd:enumeration value="ANLAGEEMPFEHLUNG"/>
+
+<xsd:enumeration value="DIENSTLEISTUNGEN_EMISSIONSGESCHAEFT"/>
+
+<xsd:enumeration value="DIENSTLEISTUNGEN_BASISWERT"/>
+
+<xsd:enumeration value="EINGESCHRAENKTES_VERWAHRGESCHAEFT"/>
+
+<xsd:enumeration value="DRITTSTAATENEINLAGENVERMITTLUNG"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="erbringungDienstleistungenType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="erbringungDienstleistungenListeType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="erbringungDienstleistungenListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="erbringungDienstleistungenEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="erbringungDienstleistungenEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="FINANZKOMMISIONSGESCHAEFT"/>
+
+<xsd:enumeration value="MARKET_MAKING"/>
+
+<xsd:enumeration value="SYSTEMATISCHE_INTERNALISIERUNG"/>
+
+<xsd:enumeration value="EIGENHANDEL"/>
+
+<xsd:enumeration value="HOCHFREQUENZHANDEL"/>
+
+<xsd:enumeration value="ABSCHLUSSVERMITTLUNG"/>
+
+<xsd:enumeration value="ANLAGEVERMITTLUNG"/>
+
+<xsd:enumeration value="EMISSIONSGESCHAEFT"/>
+
+<xsd:enumeration value="PLATZIERUNGSGESCHAEFT"/>
+
+<xsd:enumeration value="FINANZPORTFOLIOVERWALTUNG"/>
+
+<xsd:enumeration value="BETRIEB_MULTILATERALES_HANDELSSYSTEM"/>
+
+<xsd:enumeration value="BETRIEB_ORGANISIERTES_HANDELSSYSTEM"/>
+
+<xsd:enumeration value="ANLAGEBERATUNG"/>
+
+<xsd:enumeration value="DRITTSTAATENEINLAGENVERMITTLUNG"/>
+
+<xsd:enumeration value="KRYPTOVERWAHRGESCHAEFT"/>
+
+<xsd:enumeration value="SORTENGESCHAEFT"/>
+
+<xsd:enumeration value="FACTORING"/>
+
+<xsd:enumeration value="FINANZIERUNGSLEASING"/>
+
+<xsd:enumeration value="ANLAGEVERWALTUNG"/>
+
+<xsd:enumeration value="EINGESCHRAENKTES_VERWAHRGESCHAEFT"/>
+
+<xsd:enumeration value="DEPOTGESCHAEFT"/>
+
+<xsd:enumeration value="GEWAEHRUNG_KREDITE"/>
+
+<xsd:enumeration value="ORDERABWICKLUNG"/>
+
+<xsd:enumeration value="BERATUNG_UNTERNEHMEN"/>
+
+<xsd:enumeration value="DEVISENGESCHAFTE"/>
+
+<xsd:enumeration value="ANLAGEEMPFEHLUNG"/>
+
+<xsd:enumeration value="DIENSTLEISTUNGEN_EMISSIONSGESCHAEFT"/>
+
+<xsd:enumeration value="DIENSTLEISTUNGEN_BASISWERT"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="vertraglichGebundeneVermittlerType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="vertraglichGebundeneVermittlerListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="vertraglichGebundeneVermittlerListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="vertraglichGebundeneVermittlerEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="vertraglichGebundeneVermittlerEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="ANLAGEBERATUNG"/>
+
+<xsd:enumeration value="ANLAGEVERMITTLUNG"/>
+
+<xsd:enumeration value="PLATZIERUNGSGESCHAEFT"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="buchfuehrungRechnungswesenType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="buchfuehrungRechnungswesenListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="buchfuehrungRechnungswesenListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="buchfuehrungRechnungswesenEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="buchfuehrungRechnungswesenEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="ERSTELLUNG_JAHRESABSCHLUSS"/>
+
+<xsd:enumeration value="RECHNUNGSWESEN"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="aufsichtlichesAnzeigeMeldewesenType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="aufsichtlichesAnzeigeMeldewesenListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="aufsichtlichesAnzeigeMeldewesenListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="aufsichtlichesAnzeigeMeldewesenEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="aufsichtlichesAnzeigeMeldewesenEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="AIFMD_REPORTING"/>
+
+<xsd:enumeration value="ANZEIGEN_MBR"/>
+
+<xsd:enumeration value="AUFSICHTLICHE_ANZEIGEN"/>
+
+<xsd:enumeration value="BESCHWERDEBERICHT"/>
+
+<xsd:enumeration value="FINANZINFORMATIONEN"/>
+
+<xsd:enumeration value="MELDUNGEN_A26MIFIR"/>
+
+<xsd:enumeration value="MELDUNGEN_NLP"/>
+
+<xsd:enumeration value="MELDUNGEN_OTC_DERIVATE"/>
+
+<xsd:enumeration value="POSITIONSLIMITS"/>
+
+<xsd:enumeration value="MELDUNGEN_STOR"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="unterstuetzungsfunktionenDienstleistungenType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="unterstuetzungsfunktionenDienstleistungenListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="unterstuetzungsfunktionenDienstleistungenListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="unterstuetzungsfunktionenDienstleistungenEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="unterstuetzungsfunktionenDienstleistungenEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="ARCHIVIERUNG"/>
+
+<xsd:enumeration value="BESCHWERDEMANAGEMENT"/>
+
+<xsd:enumeration value="ERSTELLUNG_PRODUKTINFORMATIONSBLAETTER"/>
+
+<xsd:enumeration value="ERSTELLUNG_KUNDENINFORMATIONEN_ALLGEMEIN"/>
+
+<xsd:enumeration value="ERSTELLUNG_KUNDENINFORMATIONEN_PERSONEN_TRANSAKTION"/>
+
+<xsd:enumeration value="ERSTELLUNG_ALGORITHMEN"/>
+
+<xsd:enumeration value="LIQUIDITAETSMANAGEMENT"/>
+
+<xsd:enumeration value="ONBOARDING"/>
+
+<xsd:enumeration value="ORDERANNAHME"/>
+
+<xsd:enumeration value="PRODUCT_GOVERNANCE"/>
+
+<xsd:enumeration value="PRODUKTENTWICKLUNG"/>
+
+<xsd:enumeration value="RESEARCH"/>
+
+<xsd:enumeration value="REPORTINGPFLICHTEN"/>
+
+<xsd:enumeration value="TAPING"/>
+
+<xsd:enumeration value="VERWALTUNG_KUNDENDATEN"/>
+
+<xsd:enumeration value="WERTPAPIERABWICKLUNG"/>
+
+<xsd:enumeration value="WERTPAPIERBUCHHALTUNG"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="p6GwGType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="p6GwGEnumListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="p6GwGEnumListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="p6GwGEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="p6GwGEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="GELDWAESCHEBEAUFTRAGTER"/>
+
+<xsd:enumeration value="INTERNE_SICHERUNGSMASSNAHMEN"/>
+
+<xsd:enumeration value="PFLICHTEN_BEZUG_SONSTIGE"/>
+
+<xsd:enumeration value="PFLICHTEN_BEZUG_KUNDEN"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="p17GwGType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="p17GwGEnumListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="p17GwGEnumListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="p17GwGEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="p17GwGEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="P17_ABS_1BIS4_GWG"/>
+
+<xsd:enumeration value="P17_ABS_5BIS9_GWG"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="bestehenInteressenkonflikteType">
+
+<xsd:choice>
+
+<xsd:sequence>
+
+<xsd:element name="ja" type="mvp:emptyElementType"/>
+
+<xsd:element name="erlaeuterung" type="string_1000" minOccurs="0"/>
+			</xsd:sequence>
+
+<xsd:element name="nein" type="mvp:emptyElementType"/>
+		</xsd:choice>
+	</xsd:complexType>
+
+
+<xsd:complexType name="ausgelagerteDatenType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="ausgelagerteDatenEnumListeType"/>
+
+<xsd:element name="sonstige" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="ausgelagerteDatenEnumListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="ausgelagerteDatenEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="ausgelagerteDatenEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="DATEN_WERTPAPIERTRANSAKTIONEN"/>
+
+<xsd:enumeration value="FINANZDATEN_UNTERNEHMEN"/>
+
+<xsd:enumeration value="KONTODATEN"/>
+
+<xsd:enumeration value="KUNDENDATEN"/>
+
+<xsd:enumeration value="PERSONALDATEN"/>
+
+<xsd:enumeration value="RISIKODATEN"/>
+
+<xsd:enumeration value="ZAHLUNGSDATEN"/>
+
+<xsd:enumeration value="NICHT_EINSCHLAEGIG"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="risikobewertungRisikoanalyseType">
+
+<xsd:sequence>
+
+<xsd:element name="datum" type="mvp:dateType" minOccurs="0"/>
+
+<xsd:element name="ergebnis" type="string_4000" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="auslagerungsnehmerType">
+
+<xsd:sequence>
+
+<xsd:element name="name" type="string_100" minOccurs="0"/>
+
+<xsd:element name="handelsregisternummer" type="string_100" minOccurs="0"/>
+
+<xsd:element name="lei" type="mvp:leiType" minOccurs="0"/>
+
+<xsd:element name="adresse" type="adresseType" minOccurs="0"/>
+
+<xsd:element name="zustaendigeAufsichtsbehoerde" type="string_100" minOccurs="0"/>
+
+<xsd:element name="zulassungsRegistrierungsnummer" type="string_100" minOccurs="0"/>
+
+<xsd:element name="sonstigerNachweis" type="string_100" minOccurs="0"/>
+
+<xsd:element name="nameMutterunternehmen" type="string_100" minOccurs="0"/>
+
+<xsd:element name="staatMutterunternehmen" type="staatType" minOccurs="0"/>
+
+<xsd:element name="kontakt" type="kontaktType" minOccurs="0"/>
+
+<xsd:element name="staatDienstleistungErbracht" type="staatType" minOccurs="0"/>
+
+<xsd:element name="staatDatenGespeichert" type="staatType" minOccurs="0"/>
+
+<xsd:element name="inlaendZustellbevollmaechtigter" type="string_500" minOccurs="0"/>
+
+<xsd:element name="teilDerGruppe" type="xsd:boolean" minOccurs="0"/>
+
+<xsd:element name="imEigentum" type="xsd:boolean" minOccurs="0"/>
+
+<xsd:element name="nutzenAuslagerung" type="string_1000" minOccurs="0"/>
+
+<xsd:element name="letztePruefung" type="mvp:dateType" minOccurs="0"/>
+
+<xsd:element name="erlaeuterungenLetztePruefung" type="string_4000" minOccurs="0"/>
+
+<xsd:element name="naechstePruefung" type="mvp:dateType" minOccurs="0"/>
+
+<xsd:element name="ersetzbarkeit" type="ersetzbarkeitType" minOccurs="0"/>
+
+<xsd:element name="erlaeuterungenErsetzbarkeit" type="string_4000" minOccurs="0"/>
+
+<xsd:element name="ersetzungDauer" type="dauerType" minOccurs="0"/>
+
+<xsd:element name="wiedereingliederungMoeglich" type="xsd:boolean" minOccurs="0"/>
+
+<xsd:element name="auswirkungEinstellung" type="auswirkungEinstellungType" minOccurs="0"/>
+
+<xsd:element name="alternativeAuslagerungsnehmer" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="adresseType">
+
+<xsd:sequence>
+
+<xsd:element name="strasse" type="string_100" minOccurs="0"/>
+
+<xsd:element name="ort" type="string_100" minOccurs="0"/>
+
+<xsd:element name="plz" type="string_20" minOccurs="0"/>
+
+<xsd:element name="staat" type="staatType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="staatType">
+
+<xsd:choice>
+
+<xsd:element name="deutschland" type="mvp:emptyElementType"/>
+
+<xsd:sequence>
+
+<xsd:element name="innerhalbEUEWR" type="mvp:emptyElementType"/>
+
+<xsd:element name="staatInnerhalb" type="mvp:isoLandType"/>
+			</xsd:sequence>
+
+<xsd:sequence>
+
+<xsd:element name="ausserhalbEUEWR" type="mvp:emptyElementType"/>
+
+<xsd:element name="staatAusserhalb" type="mvp:isoLandType"/>
+			</xsd:sequence>
+		</xsd:choice>
+	</xsd:complexType>
+
+
+<xsd:complexType name="kontaktType">
+
+<xsd:sequence>
+
+<xsd:element name="nameZustaendigePerson" type="string_100" minOccurs="0"/>
+
+<xsd:element name="telefon" type="string_100" minOccurs="0"/>
+
+<xsd:element name="email" type="string_100" minOccurs="0"/>
+
+<xsd:element name="fax" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="ersetzbarkeitType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="LEICHT">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">leicht</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="SCHWIERIG">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">schwierig</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="UNMOEGLICH">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">unm&#246;glich</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="auswirkungEinstellungType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahlListe" type="auswirkungEinstellungEnumListeType"/>
+
+<xsd:element name="sonstige" type="string_4000" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="auswirkungEinstellungEnumListeType">
+
+<xsd:sequence>
+
+<xsd:element name="auswahl" type="auswirkungEinstellungEnumType" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="auswirkungEinstellungEnumType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="RISIKEN_DATENSCHUTZ_INFORMATIONSSICHERHEIT"/>
+
+<xsd:enumeration value="RISIKEN_ERBRINGUNG_WPDL"/>
+
+<xsd:enumeration value="RISIKEN_KUNDEN"/>
+
+<xsd:enumeration value="UNZUREICHENDE_KONTROLLFUNKTION"/>
+
+<xsd:enumeration value="VERSTOESSE_AUFSICHTSRECHT"/>
+
+<xsd:enumeration value="SONSTIGE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="vertragsdatenType">
+
+<xsd:sequence>
+
+<xsd:element name="vertragsbeginn" type="mvp:dateType" minOccurs="0"/>
+
+<xsd:element name="vertragsende" type="mvp:dateType" minOccurs="0"/>
+
+<xsd:element name="naechsteVerlaengerung" type="mvp:dateType" minOccurs="0"/>
+
+<xsd:element name="jaehrlicheKosten" type="kostenType" minOccurs="0"/>
+
+<xsd:element name="kuendigungsfristenUnternehmen" type="dauerType" minOccurs="0"/>
+
+<xsd:element name="kuendigungsfristenAuslagerungsnehmer" type="dauerType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="cloudAuslagerungenType">
+
+<xsd:choice>
+
+<xsd:sequence>
+
+<xsd:element name="ja" type="mvp:emptyElementType"/>
+
+<xsd:element name="cloudDienstmodell" type="cloudDienstmodellType" minOccurs="0"/>
+
+<xsd:element name="cloudBereitstellungsmodell" type="cloudBereitstellungsmodellType" minOccurs="0"/>
+			</xsd:sequence>
+
+<xsd:element name="nein" type="mvp:emptyElementType"/>
+		</xsd:choice>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="cloudDienstmodellType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="IAAS">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Infrastructure as a Service (IaaS)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="PAAS">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Plattform as a Service (PaaS)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="SAAS">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Software as a Service (SaaS)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="cloudBereitstellungsmodellType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:enumeration value="PUBLIC_CLOUD">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Public Cloud</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="PRIVATE_CLOUD">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Private Cloud</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="HYBRID_CLOUD">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Hybrid-Cloud</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+
+<xsd:enumeration value="MULTI_CLOUD">
+
+<xsd:annotation>
+
+<xsd:documentation xml:lang="de">Multicloud</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:complexType name="subunternehmenType">
+
+<xsd:sequence>
+
+<xsd:element name="weiterverlagert" type="xsd:boolean" minOccurs="0"/>
+
+<xsd:element name="verarbeitetPersonenbezogeneDaten" type="xsd:boolean" minOccurs="0"/>
+
+<xsd:element name="subunternehmenDetailsListe" type="subunternehmenDetailsListeType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="subunternehmenDetailsListeType">
+
+<xsd:sequence>
+
+<xsd:element name="subunternehmenDetails" type="subunternehmenDetailsType" maxOccurs="100"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="subunternehmenDetailsType">
+
+<xsd:sequence>
+
+<xsd:element name="name" type="string_100" minOccurs="0"/>
+
+<xsd:element name="id" type="string_100" minOccurs="0"/>
+
+<xsd:element name="staatRegistratur" type="mvp:isoLandType" minOccurs="0"/>
+
+<xsd:element name="staatDienstleistungserbringung" type="mvp:isoLandType" minOccurs="0"/>
+
+<xsd:element name="staatDatenspeicherung" type="mvp:isoLandType" minOccurs="0"/>
+
+<xsd:element name="zustaendigeAufsichtsbehoerde" type="string_100" minOccurs="0"/>
+
+<xsd:element name="zulassungsRegistrierungsnummer" type="string_100" minOccurs="0"/>
+
+<xsd:element name="sonstigerNachweis" type="string_100" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="dateiuploadType">
+
+<xsd:sequence>
+
+<xsd:element name="dateiname" type="dateinameType"/>
+
+<xsd:element name="inhalt" type="xsd:base64Binary"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:simpleType name="dateinameType">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:pattern value="[^\.\s&lt;>\?'&#34;:\|\\/\*][^\t\r\n&lt;>\?'&#34;:\|\\/\*]{0,50}\.(pdf|PDF|zip|ZIP)"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="dauerType">
+
+<xsd:restriction base="xsd:int">
+
+<xsd:minInclusive value="0"/>
+
+<xsd:maxInclusive value="999"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="kostenType">
+
+<xsd:restriction base="xsd:decimal">
+
+<xsd:minInclusive value="0"/>
+
+<xsd:totalDigits value="14"/>
+
+<xsd:fractionDigits value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="string_20">
+
+<xsd:restriction base="xsd:token">
+
+<xsd:minLength value="1"/>
+
+<xsd:maxLength value="20"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="string_100">
+
+<xsd:restriction base="xsd:token">
+
+<xsd:minLength value="1"/>
+
+<xsd:maxLength value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="string_500">
+
+<xsd:restriction base="xsd:token">
+
+<xsd:minLength value="1"/>
+
+<xsd:maxLength value="500"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="string_1000">
+
+<xsd:restriction base="xsd:token">
+
+<xsd:minLength value="1"/>
+
+<xsd:maxLength value="1000"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+<xsd:simpleType name="string_4000">
+
+<xsd:restriction base="xsd:string">
+
+<xsd:minLength value="1"/>
+
+<xsd:maxLength value="4000"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+<xsd:element name="reportAuslagerungsanzeige" type="reportAuslagerungsanzeigeType"/>
+
+</xsd:schema>
