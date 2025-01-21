@@ -22,7 +22,6 @@ src/
 │   │           ├── ReportService.java      # Business logic
 │   │           └── XmlConfig.java          # XML configuration
 │   └── resources/
-│       ├── bindings.xjb                    # JAXB bindings configuration
 │       ├── schema.xsd                      # Main XML schema
 │       └── mmdl.xsd                        # Common types schema
 ```
@@ -36,7 +35,6 @@ The project uses two main XSD files:
 - `mmdl.xsd`: Contains common data types
 
 JAXB code generation is configured using:
-- `bindings.xjb`: Controls the JAXB binding process
 - Maven's `jaxb2-maven-plugin`: Handles the actual code generation
 
 During the Maven build process:
@@ -119,9 +117,6 @@ The JAXB code generation is configured in `pom.xml`:
         <sources>
             <source>${project.basedir}/src/main/resources/schema.xsd</source>
         </sources>
-        <xjbSources>
-            <xjbSource>${project.basedir}/src/main/resources/bindings.xjb</xjbSource>
-        </xjbSources>
         <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
         <clearOutputDir>false</clearOutputDir>
     </configuration>
@@ -132,13 +127,8 @@ The JAXB code generation is configured in `pom.xml`:
 
 To customize the generated classes:
 
-1. Modify the `bindings.xjb` file to change:
-    - Package names
-    - Class names
-    - Property naming
-    - Type mappings
 
-2. Update the XSD files for:
+1. Update the XSD files for:
     - Data structure changes
     - Validation rules
     - New elements or types
