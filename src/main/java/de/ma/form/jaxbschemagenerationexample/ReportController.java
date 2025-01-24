@@ -1,6 +1,6 @@
 package de.ma.form.jaxbschemagenerationexample;
 
-import de.ma.form.generated.ReportAuslagerungsanzeige;
+import com.example.jaxb.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ReportController {
 
-    private final ReportService reportService;
-
-
     @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<ReportAuslagerungsanzeigeWrapper> getReport() {
-        ReportAuslagerungsanzeige report = reportService.generateReport();
+    public ResponseEntity<User> getReport() {
+        User user = new User();
+        user.setId(1);
+        user.setName("Test User");
+
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_XML)
-                .body(ReportAuslagerungsanzeigeWrapper.of(report));
+                .body(user);
     }
 }
